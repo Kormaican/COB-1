@@ -45,9 +45,13 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	double forward = _joy.getY(); // logitech gampad left X, positive is forward
     	double turn = _joy.getZ(); //logitech gampad right X, positive means turn right
+	    
+    	double MaxPowr = 0.5; /** limits the power. 0-1 **/
+	
+	if((_joy.getY() < 0) && (Math.abs(rioAccel.getY()) > 0.4)){
+            forward = // relate acceleration to output speed 
+        }
     	
-    	double prcntPowr = 0.5; /** limits the power. 0-1 **/
-    	
-    	if(prcntPowr<=1)_drive.arcadeDrive(prcntPowr*forward, prcntPowr*turn); // if statement prevents multiplying motor power by more than 100% (1.0)
+    	if(prcntPowr<=1)_drive.arcadeDrive(MaxPowr*forward, prcntPowr*turn); // if statement prevents multiplying motor power by more than 100% (1.0)
     }
 }
