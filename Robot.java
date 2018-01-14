@@ -14,8 +14,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class Robot extends IterativeRobot {
 
 	/* talons for arcade drive */
-	WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(11); 		/* device IDs here (1 of 2) */
-	WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(14);
+	WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(1); 		/* device IDs here (1 of 2) */
+	WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(2);
+	WPI_TalonSRX _backLeftMotor = new WPI_TalonSRX(3);
+	WPI_TalonSRX _backRightMotor = new WPI_TalonSRX(4);
 
 	/* extra talons for six motor drives 
 	WPI_VictorSPX _leftSlave1 = new WPI_VictorSPX(13);
@@ -32,10 +34,10 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	/* take our extra talons and just have them follow the Talons updated in arcadeDrive 
-    	_leftSlave1.follow(_frontLeftMotor);
-    	_leftSlave2.follow(_frontLeftMotor);
-    	_rightSlave1.follow(_frontRightMotor);
+    	// take our extra talons and just have them follow the Talons updated in arcadeDrive 
+    	_backLeftMotor.follow(_frontLeftMotor);
+    	_backRightMotor.follow(_frontRightMotor);
+    	/*_rightSlave1.follow(_frontRightMotor);
     	_rightSlave2.follow(_frontRightMotor);*/
     }
 
