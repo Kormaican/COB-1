@@ -1,5 +1,7 @@
 package org.usfirst.frc.team6945.robot;
 import com.ctre.phoenix.motorcontrol.can.*;
+
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -14,7 +16,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class Robot extends IterativeRobot {
 
 	/* talons for arcade drive */
-	WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(1); 		/* device IDs here (1 of 2) */
+	WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(1); 		/* device IDs here */
 	WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(2);
 	WPI_TalonSRX _backLeftMotor = new WPI_TalonSRX(3);
 	WPI_TalonSRX _backRightMotor = new WPI_TalonSRX(4);
@@ -25,6 +27,7 @@ public class Robot extends IterativeRobot {
 	WPI_VictorSPX _leftSlave2 = new WPI_VictorSPX(16);
 	WPI_VictorSPX _rightSlave2 = new WPI_VictorSPX(17);*/
 	
+	BuiltInAccelerometer rioAccel;
 	
 	DifferentialDrive _drive = new DifferentialDrive(_frontLeftMotor, _frontRightMotor);
 	
@@ -56,5 +59,6 @@ public class Robot extends IterativeRobot {
         }
     	
     	if(prcntPowr<=1)_drive.arcadeDrive(MaxPowr*forward, prcntPowr*turn); // if statement prevents multiplying motor power by more than 100% (1.0)
+	else _drive.arcadeDrive(forward, turn);
     }
 }
