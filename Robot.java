@@ -29,6 +29,10 @@ public class Robot extends IterativeRobot {
 	
 	BuiltInAccelerometer rioAccel;
 	
+	
+	double rateChange = 1/50;
+	double rateControl = rateChange;
+	
 	DifferentialDrive _drive = new DifferentialDrive(_frontLeftMotor, _frontRightMotor);
 	
 	Joystick _joy = new Joystick(0);
@@ -53,12 +57,15 @@ public class Robot extends IterativeRobot {
 	    
     	double MaxPowr = 0.5; /** limits the power. 0-1 **/
 	
-	if((_joy.getY() < 0) && (Math.abs(rioAccel.getY()) > 0.4)){
-            forward = forward * 0.3;// this lowers the power drastically when acceleration is more than .4 
-            // relate acceleration to output speed would be better, maybe? Test this one first
-        }
+	if((forward>0)||(forward<0)) {
+		if(rateControl<=1) {
+			forward = rateControl*forward;
+			rateControl =+ rateChange;
+		}
+	}
+	else rateControl = rateChange;
     	
-    	if(prcntPowr<=1)_drive.arcadeDrive(MaxPowr*forward, prcntPowr*turn); // if statement prevents multiplying motor power by more than 100% (1.0)
+    if(MaxPowr<=1)_drive.arcadeDrive(MaxPowr*forward, MaxPowr*turn); // if statement prevents multiplying motor power by more than 100% (1.0)
 	else _drive.arcadeDrive(forward, turn);
     }
 }
